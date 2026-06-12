@@ -44,7 +44,7 @@ def embed(text: str) -> list[float] | None:
 
 
 def query_terms(prompt: str) -> set[str]:
-    return {w.lower() for w in prompt.split() if len(w) > 4}
+    return {w.lower() for w in prompt.split() if len(w) >= 3}
 
 
 def vector_search(prompt: str) -> list[tuple[str, str]]:
@@ -85,7 +85,7 @@ def grep_fallback(prompt: str) -> list[tuple[str, str]]:
                  'getting','making','taking','having','looking','working','trying','think','know',
                  'want','need','have','will','with','from','that','this','into','then','than',
                  'just','also','been','were','them','some','your','does','will','tell','help'}
-    words = [w.lower() for w in prompt.split() if len(w) > 4 and w.lower() not in stopwords]
+    words = [w.lower() for w in prompt.split() if len(w) >= 3 and w.lower() not in stopwords]
     query = '|'.join(words[:5]) if words else ''
     if not query:
         return []
